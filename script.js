@@ -28,11 +28,15 @@ function convertLetter(letter) {
         'Y': 'y________big', 'Z': 'z________big'
     };
 
-    // 小さいひらがなも大文字として変換する
     const smallHiraganaToLarge = {
         'ぁ': 'あ', 'ぃ': 'い', 'ぅ': 'う', 'ぇ': 'え', 'ぉ': 'お',
         'ゃ': 'や', 'ゅ': 'ゆ', 'ょ': 'よ', 'っ': 'つ', 'ゎ': 'わ',
         'ゐ': 'い', 'ゑ': 'え', 'ゝ': 'い', 'ゞ': 'い', 'ゟ': 'い'
+    };
+
+    const kanjiMap = {
+        '握': '握________', // 例として追加
+        // 他の漢字の変換ルールをここに追加
     };
     
     // 小さいひらがなを大きなひらがなに変換
@@ -40,7 +44,9 @@ function convertLetter(letter) {
         letter = smallHiraganaToLarge[letter];
     }
 
-    if (dakutenMap[letter]) {
+    if (kanjiMap[letter]) {
+        return kanjiMap[letter];
+    } else if (dakutenMap[letter]) {
         return dakutenMap[letter] + 'ten';
     } else if (handakutenMap[letter]) {
         return handakutenMap[letter] + 'maru';
@@ -57,9 +63,14 @@ function addColonsToEach(text) {
 
 function convertText() {
     const inputText = document.getElementById('inputText').value;
-    // 改行を取り除く
     const normalizedText = inputText.replace(/\n/g, '');
     const outputText = addColonsToEach(normalizedText);
-    // 最初と最後のコロンを一つにするために、最初と最後のコロンを削除して再追加
     document.getElementById('outputText').value = ':' + outputText.slice(1, -1) + ':';
+}
+
+function copyToClipboard() {
+    const outputText = document.getElementById('outputText');
+    outputText.select();
+    document.execCommand('copy');
+    alert('コピーしました！');
 }
