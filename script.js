@@ -1,0 +1,50 @@
+function convertLetter(letter) {
+    const dakutenMap = {
+        'が': 'か', 'ぎ': 'き', 'ぐ': 'く', 'げ': 'け', 'ご': 'こ',
+        'ざ': 'さ', 'じ': 'し', 'ず': 'す', 'ぜ': 'せ', 'ぞ': 'そ',
+        'だ': 'た', 'ぢ': 'ち', 'づ': 'つ', 'で': 'て', 'ど': 'と',
+        'ば': 'は', 'び': 'ひ', 'ぶ': 'ふ', 'べ': 'へ', 'ぼ': 'ほ'
+    };
+    
+    const handakutenMap = {
+        'ぱ': 'は', 'ぴ': 'ひ', 'ぷ': 'ふ', 'ぺ': 'へ', 'ぽ': 'ほ'
+    };
+    
+    const alphanumericAndSymbolsMap = {
+        'a': 'a________', 'b': 'b________', 'c': 'c________', 'd': 'd________', 'e': 'e________',
+        'f': 'f________', 'g': 'g________', 'h': 'h________', 'i': 'i________', 'j': 'j________',
+        'k': 'k________', 'l': 'l________', 'm': 'm________', 'n': 'n________', 'o': 'o________',
+        'p': 'p________', 'q': 'q________', 'r': 'r________', 's': 's________', 't': 't________',
+        'u': 'u________', 'v': 'v________', 'w': 'w________', 'x': 'x________', 'y': 'y________',
+        'z': 'z________', '0': '0________', '1': '1________', '2': '2________', '3': '3________',
+        '4': '4________', '5': '5________', '6': '6________', '7': '7________', '8': '8________',
+        '9': '9________', '+': '+________',
+        'A': 'a________big', 'B': 'b________big', 'C': 'c________big', 'D': 'd________big',
+        'E': 'e________big', 'F': 'f________big', 'G': 'g________big', 'H': 'h________big',
+        'I': 'i________big', 'J': 'j________big', 'K': 'k________big', 'L': 'l________big',
+        'M': 'm________big', 'N': 'n________big', 'O': 'o________big', 'P': 'p________big',
+        'Q': 'q________big', 'R': 'r________big', 'S': 's________big', 'T': 't________big',
+        'U': 'u________big', 'V': 'v________big', 'W': 'w________big', 'X': 'x________big',
+        'Y': 'y________big', 'Z': 'z________big'
+    };
+    
+    if (dakutenMap[letter]) {
+        return dakutenMap[letter] + 'ten';
+    } else if (handakutenMap[letter]) {
+        return handakutenMap[letter] + 'maru';
+    } else if (alphanumericAndSymbolsMap[letter]) {
+        return alphanumericAndSymbolsMap[letter];
+    } else {
+        return letter + '________';
+    }
+}
+
+function addColonsToEach(text) {
+    return text.split('').map(char => `:${convertLetter(char)}:`).join('');
+}
+
+function convertText() {
+    const inputText = document.getElementById('inputText').value;
+    const outputText = addColonsToEach(inputText);
+    document.getElementById('outputText').value = ':' + outputText.slice(1, -1) + ':';
+}
