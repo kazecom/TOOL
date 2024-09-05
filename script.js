@@ -45,6 +45,9 @@ function addColonsToEach(text) {
 
 function convertText() {
     const inputText = document.getElementById('inputText').value;
-    const outputText = addColonsToEach(inputText);
+    // 改行を取り除く
+    const normalizedText = inputText.replace(/\n/g, '');
+    const outputText = addColonsToEach(normalizedText);
+    // 最初と最後のコロンを一つにするために、最初と最後のコロンを削除して再追加
     document.getElementById('outputText').value = ':' + outputText.slice(1, -1) + ':';
 }
