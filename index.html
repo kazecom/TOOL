@@ -3,20 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文字変換ツール</title>
+    <title>文字列変換ツール</title>
+</head>
+<body>
+    <h1>文字列変換ツール</h1>
+    
+    <textarea id="inputText" placeholder="ここに文字を入力"></textarea><br><br>
+    
+    <button onclick="convertText()">変換</button><br><br>
+    
+    <textarea id="outputText" readonly placeholder="変換結果がここに表示されます"></textarea><br><br>
+    
+    <button onclick="copyToClipboard()">コピー</button>
+    
+    <script src="script.js"></script>
+
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         textarea { width: 100%; height: 100px; }
         button { margin-top: 10px; }
     </style>
-</head>
-<body>
-    <h1>文字列変換ツール</h1>
-    <textarea id="inputText" placeholder="ここに文字列を入力してください"></textarea>
-    <button onclick="convertText()">変換</button>
-    <h2>変換結果</h2>
-    <textarea id="outputText" readonly></textarea>
-
-    <script src="script.js"></script>
 </body>
 </html>
