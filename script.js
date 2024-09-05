@@ -27,7 +27,19 @@ function convertLetter(letter) {
         'U': 'u________big', 'V': 'v________big', 'W': 'w________big', 'X': 'x________big',
         'Y': 'y________big', 'Z': 'z________big'
     };
+
+    // 小さいひらがなも大文字として変換する
+    const smallHiraganaToLarge = {
+        'ぁ': 'あ', 'ぃ': 'い', 'ぅ': 'う', 'ぇ': 'え', 'ぉ': 'お',
+        'ゃ': 'や', 'ゅ': 'ゆ', 'ょ': 'よ', 'っ': 'つ', 'ゎ': 'わ',
+        'ゐ': 'い', 'ゑ': 'え', 'ゝ': 'い', 'ゞ': 'い', 'ゟ': 'い'
+    };
     
+    // 小さいひらがなを大きなひらがなに変換
+    if (smallHiraganaToLarge[letter]) {
+        letter = smallHiraganaToLarge[letter];
+    }
+
     if (dakutenMap[letter]) {
         return dakutenMap[letter] + 'ten';
     } else if (handakutenMap[letter]) {
