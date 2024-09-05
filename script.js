@@ -38,13 +38,21 @@ function convertLetter(letter) {
         '握': '握________', // 例として追加
         // 他の漢字の変換ルールをここに追加
     };
+
+    // 空白の変換ルール（全角と半角）
+    const spaceMap = {
+        ' ': '-________', // 半角スペース
+        '　': '-________' // 全角スペース
+    };
     
     // 小さいひらがなを大きなひらがなに変換
     if (smallHiraganaToLarge[letter]) {
         letter = smallHiraganaToLarge[letter];
     }
 
-    if (kanjiMap[letter]) {
+    if (spaceMap[letter]) {
+        return spaceMap[letter];
+    } else if (kanjiMap[letter]) {
         return kanjiMap[letter];
     } else if (dakutenMap[letter]) {
         return dakutenMap[letter] + 'ten';
