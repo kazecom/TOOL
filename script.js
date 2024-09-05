@@ -3,11 +3,16 @@ function convertLetter(letter) {
         'が': 'か', 'ぎ': 'き', 'ぐ': 'く', 'げ': 'け', 'ご': 'こ',
         'ざ': 'さ', 'じ': 'し', 'ず': 'す', 'ぜ': 'せ', 'ぞ': 'そ',
         'だ': 'た', 'ぢ': 'ち', 'づ': 'つ', 'で': 'て', 'ど': 'と',
-        'ば': 'は', 'び': 'ひ', 'ぶ': 'ふ', 'べ': 'へ', 'ぼ': 'ほ'
+        'ば': 'は', 'び': 'ひ', 'ぶ': 'ふ', 'べ': 'へ', 'ぼ': 'ほ',
+        'ガ': 'カ', 'ギ': 'キ', 'グ': 'ク', 'ゲ': 'ケ', 'ゴ': 'コ',
+        'ザ': 'サ', 'ジ': 'シ', 'ズ': 'ス', 'ゼ': 'セ', 'ゾ': 'ソ',
+        'ダ': 'タ', 'ヂ': 'チ', 'ヅ': 'ツ', 'デ': 'テ', 'ド': 'ト',
+        'バ': 'ハ', 'ビ': 'ヒ', 'ブ': 'フ', 'ベ': 'ヘ', 'ボ': 'ホ'
     };
     
     const handakutenMap = {
-        'ぱ': 'は', 'ぴ': 'ひ', 'ぷ': 'ふ', 'ぺ': 'へ', 'ぽ': 'ほ'
+        'ぱ': 'は', 'ぴ': 'ひ', 'ぷ': 'ふ', 'ぺ': 'へ', 'ぽ': 'ほ',
+        'パ': 'ハ', 'ピ': 'ヒ', 'プ': 'フ', 'ペ': 'ヘ', 'ポ': 'ホ'
     };
     
     const alphanumericAndSymbolsMap = {
@@ -41,23 +46,26 @@ function convertLetter(letter) {
 
     // 空白の変換ルール（全角と半角）
     const spaceMap = {
-        ' ': '-________', // 半角スペース
+        ' ': '-________', // 半角スペースを修正
         '　': '-________' // 全角スペース
     };
     
+    // 空白の場合の処理
+    if (spaceMap[letter]) {
+        return spaceMap[letter];
+    }
+
     // 小さいひらがなを大きなひらがなに変換
     if (smallHiraganaToLarge[letter]) {
         letter = smallHiraganaToLarge[letter];
     }
 
-    if (spaceMap[letter]) {
-        return spaceMap[letter];
-    } else if (kanjiMap[letter]) {
+    if (kanjiMap[letter]) {
         return kanjiMap[letter];
     } else if (dakutenMap[letter]) {
-        return dakutenMap[letter] + 'ten';
+        return dakutenMap[letter] + '________' + 'ten';
     } else if (handakutenMap[letter]) {
-        return handakutenMap[letter] + 'maru';
+        return handakutenMap[letter] + '________' + 'maru';
     } else if (alphanumericAndSymbolsMap[letter]) {
         return alphanumericAndSymbolsMap[letter];
     } else {
