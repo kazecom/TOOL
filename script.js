@@ -88,5 +88,4 @@ function copyToClipboard() {
     const outputText = document.getElementById('outputText');
     outputText.select();
     document.execCommand('copy');
-    alert('コピーしました！');
 }
